@@ -71,3 +71,5 @@ end
 gem "devise", "~> 4.9"
 
 gem "responders", "~> 3.1"
+
+gem "hotwire-rails", "~> 0.1.3"
