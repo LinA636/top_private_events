@@ -12,6 +12,35 @@
   </head>
 
   <body>
+    <h1>Create your own Private Event</h1>
+    <!-- Navigation bar or other common elements go here -->
+    <div class="navbar">
+      <ul class="navbar-nav">
+        <li class="nav-item right">
+          <%= link_to "All events", events_path%>
+        </li>
+
+        <li class="nav-item right">
+          <%= link_to "User sign up", new_user_registration_path %>
+        </li>
+
+        <li class="nav-item right">
+          <%= link_to "User sign in", new_user_session_path %>
+        </li>
+
+        <li class="nav-item right">
+          <%= button_to "User sign out", destroy_user_session_path, 
+              method: :delete %>
+        </li>
+
+        <li class="nav-item right">
+          <%= link_to 'Edit Profile', 
+              edit_user_registration_path%>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Dynamic elements go here -->
     <%= yield %>
   </body>
 </html>
