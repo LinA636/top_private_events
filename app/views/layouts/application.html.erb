@@ -25,6 +25,10 @@
           <li class="nav-item right">
             <%= link_to "Create new event", new_event_path%>
           </li>
+
+          <li class="nav-item right">
+            <%= link_to "my created events", user_path(current_user)%>
+          </li>
           
           <li class="nav-item right">
             <%= button_to "User sign out", destroy_user_session_path, 

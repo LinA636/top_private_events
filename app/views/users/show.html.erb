@@ -1,0 +1,18 @@
+<h1>Events by <%= @user.name %></h1>
+
+<% if @events.any?%>
+    <p><strong>Events:</strong></p>
+
+    <ul>
+        <% @events.each do |event| %>
+            <li class="event-card">
+                <p class="event-title"><strong><%= event.title %></strong></p>
+                <p class="event-description">Description:<%= event.description %></p>
+            </li>  
+        <% end%>  
+    </ul>
+
+
+<%else%>
+    <p><strong>no events</strong></p>
+<% end%>
