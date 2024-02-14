@@ -4,9 +4,7 @@
     <% @events.each do |event| %>
         <li class="event">
             <%= link_to event.title, event_path(event) %>
-            Description:
-            <%= event.description %>
-            Made by:
+            Created by:
             <%= event.creator.name%>
         </li>  
     <% end%>  
