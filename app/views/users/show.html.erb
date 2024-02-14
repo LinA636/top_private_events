@@ -6,7 +6,9 @@
     <ul>
         <% @events.each do |event| %>
             <li class="event-card">
-                <p class="event-title"><strong><%= event.title %></strong></p>
+                <p class="event-title"><strong>
+                    <%= link_to event.title, event_path(event) %>
+                    </strong></p>
                 <p class="event-description">Description:<%= event.description %></p>
             </li>  
         <% end%>  

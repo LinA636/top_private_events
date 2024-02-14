@@ -3,7 +3,7 @@
 <ul>
     <% @events.each do |event| %>
         <li class="event">
-            <%= event.title %>
+            <%= link_to event.title, event_path(event) %>
             Description:
             <%= event.description %>
             Made by:
