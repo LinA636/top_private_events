@@ -1,13 +1,11 @@
 <h1><%= @event.title%></h1>
 
 <% if user_signed_in?%>
-    <%if current_user.attended_events.include?(@event) %>
-        <%= button_to "don't attend anymore", remove_attendance_event_path(@event), method: :post %>
+    <%if attending_event?(current_user, @event)%>
+        <%= button_to "Unattend", toggle_attendance_event_path(@event), method: :post %>
     <%else%>
-        <%= button_to "Attend event", add_attendance_event_path(@event), method: :post %>
+        <%= button_to "Attend", toggle_attendance_event_path(@event), method: :post %>
     <%end%>
-<%else%>
-
 <%end%>
 
 

@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+    helper_method :attending_event?
+
     def index
         @events = Event.all
     end
@@ -21,31 +23,19 @@ class EventsController < ApplicationController
         @event = Event.find(params[:id])      
     end
 
-    def add_attendance
+    def toggle_attendance
         @event = Event.find(params[:id])
         @user = current_user
 
-        attendance = Attendance.new(attendee: @user, attended_event: @event)
-
-        if attendance.save
-            flash[:success] = "Attendance record created successfully."
-        else
-            flash[:error] = "Error creating attendace record: #{attendance.errors.full_messages.join(', ')}"
-        end
-
-        redirect_to @event
-    end
-
-    def remove_attendance
-        @event = Event.find(params[:id])
-        @user = current_user
-        attendance = Attendance.find_by(attendee: @user)
-
+        attendance = Attendance.find_by(attendee: @user, attended_event: @event)
+        
         if attendance
             attendance.destroy
+            flash[:notice] = "You have been removed from the event."
         else
-            flash[:error] = "Error deleting attendance record: #{attendance.errors.full_messages.join(', ')}"
-            return false
+            attendance = Attendance.new(attendee: @user, attended_event: @event)
+            attendance.save
+            flash[:notice] = "You have added to the event."
         end
 
         redirect_to @event
@@ -55,5 +45,9 @@ class EventsController < ApplicationController
 
     def event_params
         params.require(:event).permit(:title, :description)      
+    end
+
+    def attending_event?(user, event)
+        user.attended_events.include?(event)
     end
 end

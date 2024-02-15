@@ -4,8 +4,9 @@ Rails.application.routes.draw do
 
   resources :events, only: [:index, :new, :create, :show] do
     member do
-      post 'add_attendance'
-      post 'remove_attendance'
+      #post 'add_attendance'
+      #post 'remove_attendance'
+      post 'toggle_attendance'
     end
   end
   resources :users, only: [:show]
