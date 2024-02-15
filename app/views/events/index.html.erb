@@ -3,9 +3,21 @@
 <ul>
     <% @events.each do |event| %>
         <li class="event">
-            <%= link_to event.title, event_path(event) %>
-            Created by:
-            <%= event.creator.name%>
+
+            <p class="event_list_body">
+                <%= link_to event.title, event_path(event) %>
+                Created by:
+                <%= event.creator.name%>
+            </p>
+            <div class="event_list_attend">
+                <% if user_signed_in?%>
+                    <%if attending_event?(current_user, event)%>
+                        <%= button_to "Unattend", toggle_attendance_event_path(event), method: :post %>
+                    <%else%>
+                        <%= button_to "Attend", toggle_attendance_event_path(event), method: :post %>
+                    <%end%>
+                <%end%>
+            </div>
         </li>  
     <% end%>  
 </ul>

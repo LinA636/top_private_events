@@ -38,7 +38,7 @@ class EventsController < ApplicationController
             flash[:notice] = "You have added to the event."
         end
 
-        redirect_to @event
+        redirect_to determine_redirect_path
     end
 
     private
@@ -49,5 +49,15 @@ class EventsController < ApplicationController
 
     def attending_event?(user, event)
         user.attended_events.include?(event)
+    end
+
+    def determine_redirect_path
+        if request.referer == event_url(@event)
+            return event_path(@event)
+        elsif request.referer == events_url
+            return events_path
+        else
+            return event_path(@event)
+        end
     end
 end
