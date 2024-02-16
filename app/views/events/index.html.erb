@@ -1,23 +1,51 @@
 <h2>All Events:</h2>
 
-<ul>
-    <% @events.each do |event| %>
-        <li class="event">
+<div class="upcoming_events">
+    <p>Upcoming Events:</p>
+    <ul>
+        <% @upcoming_events.each do |event| %>
+            <li class="event">
 
-            <p class="event_list_body">
-                <%= link_to event.title, event_path(event) %>
-                Created by:
-                <%= event.creator.name%>
-            </p>
-            <div class="event_list_attend">
-                <% if user_signed_in?%>
-                    <%if attending_event?(current_user, event)%>
-                        <%= button_to "Unattend", toggle_attendance_event_path(event), method: :post %>
-                    <%else%>
-                        <%= button_to "Attend", toggle_attendance_event_path(event), method: :post %>
+                <p class="event_list_body">
+                    <%= link_to event.title, event_path(event) %>
+                    Created by:
+                    <%= event.creator.name%>
+                </p>
+                <div class="event_list_attend">
+                    <% if user_signed_in?%>
+                        <%if attending_event?(current_user, event)%>
+                            <%= button_to "Unattend", toggle_attendance_event_path(event), method: :post %>
+                        <%else%>
+                            <%= button_to "Attend", toggle_attendance_event_path(event), method: :post %>
+                        <%end%>
                     <%end%>
-                <%end%>
-            </div>
-        </li>  
-    <% end%>  
-</ul>
+                </div>
+            </li>  
+        <% end%>  
+    </ul>
+</div>
+
+<div class="past_events">
+    <p>Past Events:</p>
+    <ul>
+        <% @past_events.each do |event| %>
+            <li class="event">
+
+                <p class="event_list_body">
+                    <%= link_to event.title, event_path(event) %>
+                    Created by:
+                    <%= event.creator.name%>
+                </p>
+                <div class="event_list_attend">
+                    <% if user_signed_in?%>
+                        <%if attending_event?(current_user, event)%>
+                            <%= button_to "Unattend", toggle_attendance_event_path(event), method: :post %>
+                        <%else%>
+                            <%= button_to "Attend", toggle_attendance_event_path(event), method: :post %>
+                        <%end%>
+                    <%end%>
+                </div>
+            </li>  
+        <% end%>  
+    </ul>
+</div>

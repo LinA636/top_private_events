@@ -22,13 +22,11 @@
 
 <div class="attended_events">
     <div><p><strong>Events I'm attending</strong></p></div>
-    <% if @attended_events.any?%>
-        <% past_and_future_events = @attended_events.group_by { |event| event.event_in_past? } %>
-        
+    <% if @attended_events.any?%>      
         <div class="past_events">
             <p class="past_events">Past Events:</p>
             <ul>
-                <% past_and_future_events[true]&.each do |event| %>
+                <% @user.attended_events.past_events.each do |event| %>
                     <li class="event-card past">
                         <p class="event-title">
                             <strong><%= link_to event.title, event_path(event) %></strong></p>
@@ -38,10 +36,10 @@
             </ul>
         </div>
 
-        <div class="future_events">
-            <p class="future_events">Future Events:</p>
+        <div class="upcoming_events">
+            <p class="upcoming_events">Upcoming Events:</p>
             <ul>
-                <% past_and_future_events[false]&.each do |event| %>
+                <% @user.attended_events.upcoming_events.each do |event| %>
                     <li class="event-card past">
                         <p class="event-title">
                             <strong><%= link_to event.title, event_path(event) %></strong></p>
