@@ -42,7 +42,7 @@ class EventsController < ApplicationController
         @event = Event.find(params[:id])
         @event.destroy
 
-        redirect_to events_path, notice: 'Event was successfully destroyed.'      
+        redirect_to user_path(current_user), notice: 'Event was successfully destroyed.'      
     end
 
     def toggle_attendance

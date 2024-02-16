@@ -4,8 +4,6 @@ Rails.application.routes.draw do
 
   resources :events do
     member do
-      #post 'add_attendance'
-      #post 'remove_attendance'
       post 'toggle_attendance'
     end
   end
