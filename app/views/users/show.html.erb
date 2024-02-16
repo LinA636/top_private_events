@@ -11,6 +11,7 @@
                             <%= link_to event.title, event_path(event) %>
                             </strong></p>
                         <p class="event-description">Description:<%= event.description %></p>
+                        <%= link_to "Edit", edit_event_path(event), method: :post %>
                     </li>
                 <% end%>
             </ul>

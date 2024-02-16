@@ -24,6 +24,27 @@ class EventsController < ApplicationController
         @event = Event.find(params[:id])      
     end
 
+    def edit
+        @event = Event.find(params[:id])
+    end
+
+    def update
+        @event = Event.find(params[:id])
+
+        if @event.update(event_params)
+            redirect_to event_path(@event),notice: 'Event was successfully updated.'
+        else
+            render :edit, status: :unprocessable_entity
+        end
+    end
+
+    def destroy
+        @event = Event.find(params[:id])
+        @event.destroy
+
+        redirect_to events_path, notice: 'Event was successfully destroyed.'      
+    end
+
     def toggle_attendance
         @event = Event.find(params[:id])
         @user = current_user
