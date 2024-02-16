@@ -8,7 +8,6 @@
     <%end%>
 <%end%>
 
-
 <p class="event-desciption">
     <%= @event.description%>
 </p>
@@ -16,3 +15,11 @@
 <p class="event-creator">
     Created by <%= @event.creator.name%>
 </p>
+
+<ul class="attendee_list">
+    <% @event.attendees.each do |attendee| %>
+        <li class="attendee">
+            <%= attendee.name %>
+        </li>  
+    <% end%> 
+</ul>
