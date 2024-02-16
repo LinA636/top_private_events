@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include EventHelper
+
   has_many :created_events, class_name: 'Event', foreign_key: 'user_id', dependent: :destroy
   has_many :attendances, foreign_key: 'attendee_id', dependent: :destroy
   has_many :attended_events, through: :attendances, source: :attended_event

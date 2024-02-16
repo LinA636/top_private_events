@@ -23,16 +23,31 @@
 <div class="attended_events">
     <div><p><strong>Events I'm attending</strong></p></div>
     <% if @attended_events.any?%>
-        <div>
+        <% past_and_future_events = @attended_events.group_by { |event| event.event_in_past? } %>
+        
+        <div class="past_events">
+            <p class="past_events">Past Events:</p>
             <ul>
-                <% @attended_events.each do |event| %>
-                    <li class="event-card">
-                        <p class="event-title"><strong>
-                            <%= link_to event.title, event_path(event) %>
-                            </strong></p>
+                <% past_and_future_events[true]&.each do |event| %>
+                    <li class="event-card past">
+                        <p class="event-title">
+                            <strong><%= link_to event.title, event_path(event) %></strong></p>
                         <p class="event-description">Description:<%= event.description %></p>
                     </li>
-                <% end%>
+                <%end%>
+            </ul>
+        </div>
+
+        <div class="future_events">
+            <p class="future_events">Future Events:</p>
+            <ul>
+                <% past_and_future_events[false]&.each do |event| %>
+                    <li class="event-card past">
+                        <p class="event-title">
+                            <strong><%= link_to event.title, event_path(event) %></strong></p>
+                        <p class="event-description">Description:<%= event.description %></p>
+                    </li>
+                <%end%>
             </ul>
         </div>
     <%else%>
