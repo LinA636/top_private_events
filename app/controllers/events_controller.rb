@@ -44,7 +44,7 @@ class EventsController < ApplicationController
     private
 
     def event_params
-        params.require(:event).permit(:title, :description)      
+        params.require(:event).permit(:title, :description, :event_date)      
     end
 
     def attending_event?(user, event)
