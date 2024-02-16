@@ -1,20 +1,41 @@
 <h1>Events by <%= @user.name %></h1>
 
-<% if @events.any?%>
-    <p><strong>Events:</strong></p>
+<div class="created_events">
+    <div><p><strong>My Created Events</strong></p></div>
+    <% if @created_events.any?%>
+        <div>
+            <ul>
+                <% @created_events.each do |event| %>
+                    <li class="event-card">
+                        <p class="event-title"><strong>
+                            <%= link_to event.title, event_path(event) %>
+                            </strong></p>
+                        <p class="event-description">Description:<%= event.description %></p>
+                    </li>
+                <% end%>
+            </ul>
+        </div>
+    <%else%>
+        <p>no events</p>
+    <% end%>
+</div>
 
-    <ul>
-        <% @events.each do |event| %>
-            <li class="event-card">
-                <p class="event-title"><strong>
-                    <%= link_to event.title, event_path(event) %>
-                    </strong></p>
-                <p class="event-description">Description:<%= event.description %></p>
-            </li>  
-        <% end%>  
-    </ul>
-
-
-<%else%>
-    <p><strong>no events</strong></p>
-<% end%>
+<div class="attended_events">
+    <div><p><strong>Events I'm attending</strong></p></div>
+    <% if @attended_events.any?%>
+        <div>
+            <ul>
+                <% @attended_events.each do |event| %>
+                    <li class="event-card">
+                        <p class="event-title"><strong>
+                            <%= link_to event.title, event_path(event) %>
+                            </strong></p>
+                        <p class="event-description">Description:<%= event.description %></p>
+                    </li>
+                <% end%>
+            </ul>
+        </div>
+    <%else%>
+        <p>no events</p>
+    <%end%>
+</div>
